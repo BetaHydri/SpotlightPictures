@@ -55,8 +55,7 @@ function Copy-SpotLightPictures {
     begin {
         
         $i = 0
-        # Aktuelle Sprache herrausfinden
-        #$key = 'HKCU:\Control Panel\International\'
+        # Aktuelle Sprache herrausfinden --> $key = 'HKCU:\Control Panel\International\'
         $language = (Get-WinUserLanguageList).LanguageTag
         $quellordner = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets"
         $zielorder = $DestPath
