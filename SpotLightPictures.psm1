@@ -78,7 +78,7 @@ function Copy-SpotLightPictures {
         }
         "$($dateien.Count) Bilder kopiert!"
 
-        $PicturestoDelete = Get-ChildItem $zielorder | Get-FileMetaData 
+        $PicturestoDelete = Get-ChildItem $zielorder | Get-FileMetaData
         foreach ($picture in $PicturestoDelete)
         {
             if($language -like "de*") {
