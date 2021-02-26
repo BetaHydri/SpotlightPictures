@@ -2,8 +2,8 @@
  
     param(
         [Parameter(Mandatory = $true, 
-                   ValueFromPipeline = $true, 
-                   ValueFromPipelineByPropertyName = $true)]
+            ValueFromPipeline = $true, 
+            ValueFromPipelineByPropertyName = $true)]
         [Alias('FullName', 'PSPath')]
         [string[]]$Path
     )
@@ -30,8 +30,8 @@
                     $ExtValName = $oFolder.GetDetailsOf($oItem, $_)
                 
                     if (-not $props.ContainsKey($ExtPropName) -and 
-                            ($ExtPropName -ne '')) {
-                                $props.Add($ExtPropName, $ExtValName)
+                        ($ExtPropName -ne '')) {
+                        $props.Add($ExtPropName, $ExtValName)
                     }
  
                 }
@@ -49,14 +49,15 @@
 
 function Copy-SpotLightPictures {
     param(
-        [Parameter(ValueFromPipeline = $true,ValueFromPipelineByPropertyName = $true)][string]$DestPath = "$env:OneDrive\Pictures\Wallpapers\MySpotlight",     
+        [Parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)][string]$DestPath = "$env:OneDrive\Pictures\Wallpapers\MySpotlight",     
         [switch]$ShowPictures
     )
     begin {
         
         $i = 0
         # Aktuelle Sprache herrausfinden --> $key = 'HKCU:\Control Panel\International\'
-        $language = (Get-WinUserLanguageList).LanguageTag
+        #$language = (Get-WinUserLanguageList).LanguageTag
+        $language = (Get-WinSystemLocale).Name
         $quellordner = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets"
         $zielorder = $DestPath
     }
@@ -67,44 +68,40 @@ function Copy-SpotLightPictures {
         $dateien = Get-ChildItem $quellordner
         "Kopiere $($dateien.Count) Dateien..."
 
-        foreach($datei in $dateien)
-        {
+        foreach ($datei in $dateien) {
             $zieldatei = "$zielorder\$($datei.name).jpg"
             Copy-Item $datei.FullName $zieldatei
             if ($ShowPictures) {
-                write-host "Kopiere: $zieldatei" -foregroundColor Yellow
+                Write-Host "Kopiere: $zieldatei" -ForegroundColor Yellow
             }
         }
         "$($dateien.Count) Bilder kopiert!"
 
         $PicturestoDelete = Get-ChildItem $zielorder | Get-FileMetaData
-        foreach ($picture in $PicturestoDelete)
-        {
-            if($language -like "de*") {
+        foreach ($picture in $PicturestoDelete) {
+            if ($language -like "de*") {
                 #Löschen falls keine Breitenangabe vorhanden in DE
                 if ($picture.Breite -eq '') { 
                     Remove-Item "$zielorder\$($picture.Dateiname)" -Force
-                    $i+= 1 
+                    $i += 1 
                     continue  
                 }
-                if([int]($picture.Breite).substring(1,5).split(' ')[0] -lt 1920)
-                {
-                        Remove-Item "$zielorder\$($picture.Dateiname)" -Force
-                        $i+= 1 
+                if ([int]($picture.Breite).substring(1, 5).split(' ')[0] -lt 1920) {
+                    Remove-Item "$zielorder\$($picture.Dateiname)" -Force
+                    $i += 1 
                 }
             }
             elseif ($language -like "en*") {
-                    #Löschen falls keine Breitenangabe vorhanden in EN
-                    if ($picture.Width -eq '') { 
-                        Remove-Item "$zielorder\$($picture.name)" -Force
-                        $i+= 1 
-                        continue  
-                    }
-                    if([int]($picture.Width).substring(1,5).split(' ')[0] -lt 1920)
-                    {
-                        Remove-Item "$zielorder\$($picture.name)" -Force
-                        $i+= 1 
-                    }
+                #Löschen falls keine Breitenangabe vorhanden in EN
+                if ($picture.Width -eq '') { 
+                    Remove-Item "$zielorder\$($picture.name)" -Force
+                    $i += 1 
+                    continue  
+                }
+                if ([int]($picture.Width).substring(1, 5).split(' ')[0] -lt 1920) {
+                    Remove-Item "$zielorder\$($picture.name)" -Force
+                    $i += 1 
+                }
             }
         } 
         "$($i) Bilder wurden gelöscht"
