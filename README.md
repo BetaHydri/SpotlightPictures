@@ -3,7 +3,7 @@
 ### Info: <b>EN-\*</b> and <b>DE-\*</b> WIndows 10 locale is actual supported. At least 1080p pictures will be kept.
 
 ### cmdlet NAME
-    __ Copy-SpotLightPictures __
+    __Copy-SpotLightPictures__
 
 SYNTAX
     
