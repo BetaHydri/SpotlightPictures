@@ -49,7 +49,7 @@
 
 function Copy-SpotLightPictures {
     param(
-        [Parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)][string]$DestPath = "$env:OneDrive\Pictures\Wallpapers\MySpotlight",     
+        [Parameter(ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true)][string]$DestPath = "$env:OneDriveConsumer\Pictures\Wallpapers\MySpotlight",     
         [switch]$ShowPictures
     )
     begin {

@@ -6,7 +6,8 @@ cmdlet NAME
     <b>Copy-SpotLightPictures</b>
 
 SYNTAX
-    Copy-SpotLightPictures [[-DestPath] <string>] [-ShowPictures]  [<CommonParameters>]
+    
+```Copy-SpotLightPictures [[-DestPath] <string>] [-ShowPictures]  [<CommonParameters>]```
 
 
 PARAMETERS
