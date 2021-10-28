@@ -1,4 +1,4 @@
-## SpotlightPictures - PosH Module to backup of Windows 10 Spotlight Wallpaper Pictures into desired destination folder.
+## SpotlightPictures - PosH Module to backup of Windows 10 / 11 Spotlight Wallpaper Pictures into desired destination folder.
 
 ##### Info: EN-\* and DE-\* Windows 10 System-Locale is actual supported. At least 1080p pictures will be kept.
 
