@@ -8,6 +8,7 @@
 SYNTAX
     
 ```Copy-SpotLightPictures [[-DestPath] <string>] [-ShowPictures]  [<CommonParameters>]```
+````Default DestPath is: $env:OneDriveConsumer\Pictures\Wallpapers\MySpotlight````
 
 
 PARAMETERS
